@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add your CSS properties here */
+
+.NavContainer{
+    @apply 
+    bg-neutral-400 
+    p-5 
+    h-auto 
+    flex 
+    flex-row 
+    justify-center
+    text-xl
+    text-white
+}
+
+.ThreeNavButtons{
+    @apply 
+    absolute left-5 
+    h-auto 
+    flex 
+    flex-row 
+    w-[250] 
+    min-w-[250]
+}
+
+.UserSettings{
+    @apply
+    absolute right-5
+}

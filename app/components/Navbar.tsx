@@ -2,30 +2,20 @@
 import Link from "next/link";
 
 export default function Navbar() {
-  return (
-    <>
-      <nav className="bg-gray-800 p-4">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link href="/">
-                <div className="text-white text-lg font-bold">
-                  My Next.js App
-                </div>
-              </Link>
-            </div>
-            <div className="flex space-x-4">
-              <Link href="/">
-                <div className="text-white">Home</div>
-              </Link>
-              <Link href="/">
-                <div className="text-white">About</div>
-              </Link>
-              {/* Add more links as needed */}
-            </div>
-          </div>
-        </div>
-      </nav>
-    </>
-  );
+	return (
+		<>
+			<nav className=" NavContainer ">
+				<div className=" ThreeNavButtons ">
+					{/* Insert Icons Here Instead of Names */}
+					<div>Lib</div>
+					<div className="mx-[25px]">Home</div>
+					<div>Search</div>
+				</div>
+
+				<div className=" Logo-Name h-auto w-auto">SonaSense</div>
+
+				<div className=" UserSettings ">Settings</div>
+			</nav>
+		</>
+	);
 }
