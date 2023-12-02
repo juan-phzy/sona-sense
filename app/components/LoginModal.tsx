@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
+import { Input } from "@/app/components/ui/input";
+import { Button } from "@/app/components/ui/button";
+import { Icons } from "@/app/components/icons";
 
 interface LoginModalProps extends React.HTMLAttributes<HTMLDivElement> {}
 
