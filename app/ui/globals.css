@@ -4,6 +4,14 @@
 
 /* Add your CSS properties here */
 
+/* CSS RESET */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* TOP NAV BAR STYLING */
 .NavContainer {
   @apply bg-neutral-400 
     p-5 
@@ -14,6 +22,7 @@
     text-xl
     text-white;
 }
+
 
 .ThreeNavButtons {
   @apply absolute left-5 
