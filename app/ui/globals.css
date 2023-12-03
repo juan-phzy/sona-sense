@@ -23,7 +23,7 @@
     text-white;
 }
 
-
+/* NAV BAR LEFT BUTTON GROUP STYLING */
 .ThreeNavButtons {
   @apply absolute left-5 
     h-auto 
@@ -33,12 +33,17 @@
     min-w-[250];
 }
 
+/* NAV BAR USER BUTTON STYLING */
 .UserSettings {
   @apply absolute right-5;
 }
 
+
+/* SHADCN/UI COMPONENT STYLES: SITE COLOR THEME IN HSL FORMAT */
 @layer base {
   :root {
+    /* HSL COLOR PICKER */
+    --hsl-color-picker: hsl(222,84,4.9);
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -48,7 +53,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 213 0% 43%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;

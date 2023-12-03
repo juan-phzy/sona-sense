@@ -6,6 +6,8 @@ import Navbar from "@/app/components/Navbar";
 import Image from "next/image";
 import homeImage from "@/public/images/homeImage.jpg";
 import { Button } from "./components/ui/button";
+import { CiLogin } from "react-icons/ci";
+import { FaUserPlus } from "react-icons/fa6";
 
 //-------------------------------------------------------
 /*
@@ -57,8 +59,13 @@ export default function Page() {
 							<div>A new way to search for the sounds you love</div>
 							<div className="w-full flex flex-row gap-x-8 text-xl">
 								{/*Subsitute bottom two divs with button components with user account functionality*/}
-								<Button variant="ghost">Log In.</Button>
-								<Button variant="ghost">Create Account.</Button>
+								<Button>
+									<CiLogin className="mr-2 h-4 w-4" /> Log In.
+								</Button>
+								<Button>
+									<FaUserPlus className="mr-2 h-4 w-4" /> Create
+									Account.
+								</Button>
 							</div>
 						</section>
 					</section>

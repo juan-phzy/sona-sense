@@ -2,22 +2,26 @@ import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "@/app/ui/globals.css";
 import Navbar from "@/app/components/Navbar";
+import ModalProvider from "@/providers/ModalProvider";
 
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SonaSense",
-  description: "Student Project for Music Web Player",
+	title: "SonaSense",
+	description: "Student Project for Music Web Player",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={font.className}>{children}</body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={font.className}>
+				<ModalProvider />
+				{children}
+			</body>
+		</html>
+	);
 }
