@@ -1,31 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { LoginModal } from "../components/LoginModal";
-import { RegisterModal } from "../components/RegisterModal";
+import { Button } from "@/app/components/ui/button";
+import { CiLogin } from "react-icons/ci";
+import { FaUserPlus } from "react-icons/fa6";
+import useAuthModal from "@/hooks/useAuthModal";
 
-export default function Page() {
-	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-	const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+export default function LoginButtons() {
+	const authModal = useAuthModal();
 
 	return (
 		<>
-			{isLoginModalOpen && <LoginModal />}
-			{isRegisterModalOpen && <RegisterModal />}
-
-			<button
-				onClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
-				className="bg-white text-indigo-500 px-4 py-2 rounded shadow mb-4"
-			>
-				Log In.
-			</button>
-
-			<button
-				onClick={() => setIsRegisterModalOpen(!isLoginModalOpen)}
-				className="bg-white text-indigo-500 px-4 py-2 rounded shadow mb-4"
-			>
-				Create Account.
-			</button>
+			<Button onClick={authModal.onOpen}>
+				<CiLogin className="mr-2 h-4 w-4" /> Log In.
+			</Button>
+			<Button onClick={authModal.onOpen}>
+				<FaUserPlus className="mr-2 h-4 w-4" /> Create Account.
+			</Button>
 		</>
 	);
 }
