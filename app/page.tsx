@@ -20,14 +20,14 @@ export default function Page() {
 			------------------------------------------------------------------------------------------------------
 			Main container which fills the full viewport. The Navbar and Body go inside stacked as a flex column - juan
 			----------------------------------------------------------------------------------------------------*/}
-			<main className="Site-Container w-screen h-screen flex flex-col min-w-[1111px]">
+			<main className="Site-Container w-full h-full flex flex-col min-w-[1111px]">
 				{/* 
 				-----------------------------------------------------------------------------------------------
 				Container for the Navbar. The Navbar component goes inside. Fills width and fits content height - juan
-				----------------------------------------------------------------------------------------------*/}
+				----------------------------------------------------------------------------------------------
 				<nav className="w-full h-fit">
 					<Navbar />
-				</nav>
+				</nav>*/}
 				{/*
 				-----------------------------------------------------------------------------------------------------
 				Container for the body. The body content goes inside. Content is centered and 50px padding all around - juan

@@ -15,10 +15,11 @@
 .NavContainer {
   @apply bg-neutral-400 
     p-5 
+    w-full
     h-[80px]
     flex 
     flex-row 
-    justify-center
+    justify-between
     items-center
     text-xl
     text-white;
@@ -26,7 +27,7 @@
 
 /* NAV BAR LEFT BUTTON GROUP STYLING */
 .ThreeNavButtons {
-  @apply absolute left-5 
+  @apply
     h-[40px] 
     flex 
     flex-row 
@@ -38,13 +39,13 @@
 
 /* NAV BAR USER BUTTON STYLING */
 .UserSettings {
-  @apply absolute right-5
+  @apply
   flex
   flex-row
-  justify-center
+  justify-end
   items-center
-  min-w-fit
-  w-fit
+  min-w-[175px]
+  w-[175px]
   h-[40px]
 }
 

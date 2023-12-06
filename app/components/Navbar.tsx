@@ -8,22 +8,64 @@ import {
 	BsHouseDoorFill,
 	BsSearch,
 	BsPersonCircle,
+	BsCollectionPlayFill,
 } from "react-icons/bs";
 import { Button } from "@/app/components/ui/button";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
-import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import NavbarItem from "@/app/components/NavbarItem";
+import useLibrary from "@/hooks/useLibrary";
 
-export default function Navbar() {
+interface NavbarProps {
+	children: React.ReactNode;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const supabaseClient = useSupabaseClient();
 	const { user } = useUser();
 	const router = useRouter();
+	const pathname = usePathname();
+	const { isOpen } = useLibrary();
+
+	const routes = useMemo(
+		() => [
+			{
+				icon: BsCollectionPlayFill,
+				label: "Sidebar",
+				isToggle: true,
+			},
+			{
+				icon: BsHouseDoorFill,
+				label: "Home",
+				active: pathname === "/dashboard",
+				href: "/dashboard",
+			},
+			{
+				icon: BsSearch,
+				label: "Search",
+				active: pathname === "/dashboard/search",
+				href: "/dashboard/search",
+			},
+		],
+		[pathname]
+	);
+
+	useEffect(() => {
+		if (
+			!user &&
+			(pathname === "/dashboard" || pathname === "/dashboard/search")
+		) {
+			router.push("/");
+			toast.error("Please sign in");
+		}
+	}, [pathname]);
 
 	const handleLogout = async () => {
 		const { error } = await supabaseClient.auth.signOut();
 		//todo reset any playing songs
-
 		router.push("/");
 		router.refresh();
 
@@ -34,42 +76,58 @@ export default function Navbar() {
 		}
 	};
 
+	if (!user && pathname === "/dashboard") {
+		return (
+			<div className="bg-black w-screen h-screen flex justify-center items-center text-white">
+				Loading...
+			</div>
+		);
+	}
+
 	return (
 		<>
-			<nav className=" NavContainer ">
-				<div className=" ThreeNavButtons ">
-					{/* Insert Icons Here Instead of Names */}
-					<Button variant="ghost">
-						<BsCollectionFill className="w-[1.4rem] h-[1.4rem]" />
-					</Button>
-					<Button variant="ghost">
-						<BsHouseDoorFill className="w-[1.4rem] h-[1.4rem]" />
-					</Button>
-					<Button variant="ghost">
-						<BsSearch className="w-[1.4rem] h-[1.4rem]" />
-					</Button>
-				</div>
+			<div className="flex flex-col justify-center items-center w-screen h-screen min-w-[1111px]">
+				<nav className=" NavContainer ">
+					<div className=" ThreeNavButtons ">
+						{user ? (
+							<>
+								<div className="flex flex-row justify-between">
+									{routes.map((item) => (
+										<NavbarItem key={item.label} {...item} />
+									))}
+								</div>
+							</>
+						) : null}
+					</div>
 
-				<div className=" Logo-Name h-auto w-auto text-3xl">SonaSense</div>
+					<div className=" Logo-Name h-auto w-[175px] text-3xl">
+						<Link href={"/"}>SonaSense</Link>
+					</div>
 
-				<div className=" UserSettings ">
-					{user ? (
-						<div>
-							<Button
-								onClick={handleLogout}
-								variant="ghost"
-								className="text-[1.1rem]"
-							>
-								Logout
+					<div className=" UserSettings ">
+						{user ? (
+							<div>
+								<Button
+									onClick={handleLogout}
+									variant="ghost"
+									className="text-[1.1rem]"
+								>
+									Logout
+								</Button>
+							</div>
+						) : (
+							<Button variant="ghost">
+								<BsPersonCircle className="w-[1.4rem] h-[1.4rem]" />
 							</Button>
-						</div>
-					) : (
-						<Button variant="ghost">
-							<BsPersonCircle className="w-[1.4rem] h-[1.4rem]" />
-						</Button>
-					)}
-				</div>
-			</nav>
+						)}
+					</div>
+				</nav>
+
+				{/** Page body begins here */}
+				<main className="w-full h-full">{children}</main>
+			</div>
 		</>
 	);
-}
+};
+
+export default Navbar;
