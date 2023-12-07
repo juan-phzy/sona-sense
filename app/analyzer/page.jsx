@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import analyzeSong from "@/utils/analyzeSong";
 
 const SongAnalysis = () => {
   const [songPath, setSongPath] = useState("song-all of me-lpur9r27");
@@ -8,28 +9,13 @@ const SongAnalysis = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const lambdaUrl = process.env.NEXT_PUBLIC_LAMBDA_URL;
-  
-
   const fetchSongAnalysis = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const urlWithQueryParam = `${lambdaUrl}?song_path=${encodeURIComponent(
-        songPath
-      )}`;
-
-      const response = await fetch(urlWithQueryParam, {
-        method: "GET",
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setAnalysisResult(data);
+      const result = await analyzeSong(songPath);
+      setAnalysisResult(result);
     } catch (error) {
       console.error("Error fetching song analysis:", error);
       setError("Failed to fetch song analysis.");
