@@ -6,6 +6,8 @@ import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import Navbar from "./components/Navbar";
+import Head from "next/head";
+import Script from "next/script";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -30,6 +32,9 @@ export default function RootLayout({
 					</UserProvider>
 				</SupabaseProvider>
 			</body>
+			<Script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.0/dist/essentia-wasm.web.js" />
+			<Script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.0/dist/essentia.js-core.js" />
+			<Script src="/essentiaScripts/main.js" async defer />
 		</html>
 	);
 }

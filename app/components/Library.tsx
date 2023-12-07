@@ -1,10 +1,13 @@
 "use client";
 
+import useUploadModal from "@/hooks/useUploadModal";
 import { BsMusicNoteList, BsPlusSquare } from "react-icons/bs";
 
 const Library = () => {
+	const uploadModal = useUploadModal();
+
 	const onClick = () => {
-		//handle upload later
+		return uploadModal.openModal();
 	};
 	return (
 		<>

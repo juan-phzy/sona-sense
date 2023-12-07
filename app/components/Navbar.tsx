@@ -11,13 +11,12 @@ import {
 	BsCollectionPlayFill,
 } from "react-icons/bs";
 import { Button } from "@/app/components/ui/button";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import { toast } from "react-hot-toast";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import NavbarItem from "@/app/components/NavbarItem";
-import useLibrary from "@/hooks/useLibrary";
 
 interface NavbarProps {
 	children: React.ReactNode;
@@ -28,8 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const { user } = useUser();
 	const router = useRouter();
 	const pathname = usePathname();
-	const { isOpen } = useLibrary();
-
+	const session = useSession();
 	const routes = useMemo(
 		() => [
 			{
@@ -55,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 
 	useEffect(() => {
 		if (
-			!user &&
+			!session &&
 			(pathname === "/dashboard" || pathname === "/dashboard/search")
 		) {
 			router.push("/");
@@ -76,7 +74,10 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 		}
 	};
 
-	if (!user && pathname === "/dashboard") {
+	if (
+		!session &&
+		(pathname === "/dashboard" || pathname === "/dashboard/search")
+	) {
 		return (
 			<div className="bg-black w-screen h-screen flex justify-center items-center text-white">
 				Loading...
