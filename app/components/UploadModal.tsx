@@ -36,11 +36,15 @@ const UploadModal = () => {
 	};
 
 	const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+		const { title, image, song } = values;
+
+		// replace spaces with underscores
+		const titleWithNoSpaces = title.replace(/\s+/g, '_');
 		try {
 			setIsLoading(true);
 
-			const imageFile = values.image?.[0];
-			const songFile = values.song?.[0];
+			const imageFile = image?.[0];
+			const songFile = song?.[0];
 
 			if (!imageFile || !songFile || !user) {
 				toast.error("Missing fields");
@@ -53,7 +57,7 @@ const UploadModal = () => {
 			const { data: songData, error: songError } =
 				await supabaseClient.storage
 					.from("songs")
-					.upload(`song-${values.title}-${uniqueID}`, songFile, {
+					.upload(`song-${titleWithNoSpaces}-${uniqueID}`, songFile, {
 						cacheControl: "3600",
 						upsert: false,
 					});
@@ -67,7 +71,7 @@ const UploadModal = () => {
 			const { data: imageData, error: imageError } =
 				await supabaseClient.storage
 					.from("images")
-					.upload(`image-${values.title}-${uniqueID}`, imageFile, {
+					.upload(`image-${titleWithNoSpaces}-${uniqueID}`, imageFile, {
 						cacheControl: "3600",
 						upsert: false,
 					});
@@ -81,7 +85,7 @@ const UploadModal = () => {
 				.from("songs")
 				.insert({
 					user_id: user.id,
-					title: values.title,
+					title: titleWithNoSpaces,
 					artist: userDetails?.username,
 					image_path: imageData.path,
 					song_path: songData.path,
