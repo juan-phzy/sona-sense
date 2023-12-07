@@ -1,20 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import analyzeSong from "@/utils/analyzeSong";
 
-const SongAnalysis = () => {
-  const [songPath, setSongPath] = useState("song-all of me-lpur9r27");
-  const [analysisResult, setAnalysisResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+interface AnalysisResult {
+  bpm: string;
+  key: string;
+}
+
+const SongAnalysis: FC = () => {
+  const [songPath, setSongPath] = useState<string>("song-all of me-lpur9r27");
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(
+    null
+  );
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchSongAnalysis = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const result = await analyzeSong(songPath);
+      const result: AnalysisResult = await analyzeSong(songPath);
       setAnalysisResult(result);
     } catch (error) {
       console.error("Error fetching song analysis:", error);
