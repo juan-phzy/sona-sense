@@ -2,12 +2,23 @@
 
 import useUploadModal from "@/hooks/useUploadModal";
 import { BsMusicNoteList, BsPlusSquare } from "react-icons/bs";
+import { useUser } from "@/hooks/useUser";
+import { toast } from "react-hot-toast";
 
 const Library = () => {
 	const uploadModal = useUploadModal();
+	const { userDetails } = useUser();
+	let canUpload: boolean;
+	if (userDetails) {
+		canUpload = userDetails.is_artist;
+	}
 
 	const onClick = () => {
-		return uploadModal.openModal();
+		if (canUpload) {
+			return uploadModal.openModal();
+		} else {
+			toast.error("Only artists may upload music");
+		}
 	};
 	return (
 		<>
@@ -31,6 +42,7 @@ const Library = () => {
 							Your Library
 						</p>
 					</div>
+
 					<BsPlusSquare
 						onClick={onClick}
 						size={20}

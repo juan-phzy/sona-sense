@@ -24,7 +24,7 @@ const AuthModal = () => {
 	const [username, setUsername] = useState("");
 	const [first_name, setFirstName] = useState("");
 	const [last_name, setLastName] = useState("");
-	const [is_artist, setIsArtist] = useState("");
+	const [is_artist, setIsArtist] = useState("No");
 	const isArtist = is_artist === "yes" ? true : false;
 
 	const handleSignUp = async (email: string, password: string) => {
@@ -135,10 +135,11 @@ const AuthModal = () => {
 			) : (
 				<form
 					onSubmit={handleSubmit}
-					className="flex flex-col gap-4 justify-center items-center text-black"
+					className="flex flex-col gap-4 w-full justify-center items-center text-white"
 				>
 					{/* Your custom form inputs */}
 					<input
+						id="email"
 						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -168,12 +169,15 @@ const AuthModal = () => {
 						onChange={(e) => setLastName(e.target.value)}
 						placeholder="Last Name"
 					/>
-					<input
-						type="text"
+					<label>Are you an artist?</label>
+					<select
+						className="text-black"
 						value={is_artist}
-						onChange={(e) => setIsArtist(e.target.value)}
-						placeholder="Are you an artist?"
-					/>
+						onChange={(e) => setLastName(e.target.value)}
+					>
+						<option>Yes</option>
+						<option>No</option>
+					</select>
 					{/* Your custom buttons and other UI elements */}
 					<button className="text-white bg-gray-600 p-2" type="submit">
 						Sign Up
