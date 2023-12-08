@@ -31,7 +31,6 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const { closeLib } = useLibrary();
 	const pathname = usePathname();
 	const session = useSession();
-	const player = usePlayer();
 	const routes = useMemo(
 		() => [
 			{
@@ -66,7 +65,6 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 		const { error } = await supabaseClient.auth.signOut();
 		//todo reset any playing songs
 		closeLib();
-		player.setId(undefined);
 		router.push("/");
 		router.refresh();
 
