@@ -124,6 +124,24 @@ const UploadModal = () => {
 			isOpen={uploadModal.isOpen}
 			onChange={onChange}
 		>
+			{isLoading ? (
+				<div
+					className="LoadingTemplate
+				absolute
+				top-0
+				left-0
+				w-full
+				h-full
+				bg-neutral-900/95
+				rounded-md
+				flex
+				justify-center
+				items-center"
+				>
+					Your song is uploading, please wait...
+				</div>
+			) : null}
+
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="flex flex-col gap-y-4"
