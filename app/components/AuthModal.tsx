@@ -25,7 +25,7 @@ const AuthModal = () => {
 	const [first_name, setFirstName] = useState("");
 	const [last_name, setLastName] = useState("");
 	const [is_artist, setIsArtist] = useState("No");
-	const isArtist = is_artist === "yes" ? true : false;
+	const isArtist = is_artist === "Yes" ? true : false;
 
 	const handleSignUp = async (email: string, password: string) => {
 		const { data, error } = await supabaseClient.auth.signUp({
@@ -135,7 +135,7 @@ const AuthModal = () => {
 			) : (
 				<form
 					onSubmit={handleSubmit}
-					className="flex flex-col gap-4 w-full justify-center items-center text-white"
+					className="flex flex-col gap-4 w-full justify-center items-center text-black"
 				>
 					{/* Your custom form inputs */}
 					<input
@@ -169,11 +169,11 @@ const AuthModal = () => {
 						onChange={(e) => setLastName(e.target.value)}
 						placeholder="Last Name"
 					/>
-					<label>Are you an artist?</label>
+					<label className="text-white">Are you an artist?</label>
 					<select
 						className="text-black"
 						value={is_artist}
-						onChange={(e) => setLastName(e.target.value)}
+						onChange={(e) => setIsArtist(e.target.value)}
 					>
 						<option>Yes</option>
 						<option>No</option>
