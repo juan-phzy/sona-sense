@@ -17,6 +17,7 @@ import { toast } from "react-hot-toast";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import NavbarItem from "@/app/components/NavbarItem";
+import useLibrary from "@/hooks/useLibrary";
 
 interface NavbarProps {
 	children: React.ReactNode;
@@ -26,6 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const supabaseClient = useSupabaseClient();
 	const { user } = useUser();
 	const router = useRouter();
+	const { closeLib } = useLibrary();
 	const pathname = usePathname();
 	const session = useSession();
 	const routes = useMemo(
@@ -64,6 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const handleLogout = async () => {
 		const { error } = await supabaseClient.auth.signOut();
 		//todo reset any playing songs
+		closeLib();
 		router.push("/");
 		router.refresh();
 
