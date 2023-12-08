@@ -6,6 +6,8 @@ import { useUser } from "@/hooks/useUser";
 import fetchSongs from "@/utils/fetchSongs";
 import { useEffect } from "react";
 import { useSongs } from "@/providers/SongsProvider";
+import usePlayer from "@/hooks/usePlayer";
+import { twMerge } from "tailwind-merge";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -13,6 +15,7 @@ interface SidebarProps {
 
 const SideBar: React.FC<SidebarProps> = ({ children }) => {
   const { songs, setSongs } = useSongs();
+  const player = usePlayer();
   const { isOpen } = useLibrary();
   const { user } = useUser();
 
@@ -30,7 +33,12 @@ const SideBar: React.FC<SidebarProps> = ({ children }) => {
 
   return (
     <>
-      <div className="flex flex-row w-full h-full">
+      <div
+        className={twMerge(
+          `flex flex-row w-full h-full`,
+          player.activeId && "h-[calc(100%-80px)]"
+        )}
+      >
         {isOpen ? (
           <div className="flex h-full">
             <div

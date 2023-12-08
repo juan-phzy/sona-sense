@@ -8,6 +8,7 @@ import ToasterProvider from "@/providers/ToasterProvider";
 import SongsProvider from "@/providers/SongsProvider";
 import Navbar from "@/app/components/Navbar";
 import Sidebar from "@/app/components/SideBar";
+import Player from "./components/Player";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default async function RootLayout({
               <ModalProvider />
               <Navbar>
                 <Sidebar>{children}</Sidebar>
+                <Player />
               </Navbar>
             </SongsProvider>
           </UserProvider>
