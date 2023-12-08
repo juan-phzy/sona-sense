@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import {
-	BsCollectionFill,
-	BsCollection,
-	BsHouseDoor,
 	BsHouseDoorFill,
 	BsSearch,
 	BsPersonCircle,
@@ -14,10 +11,13 @@ import { Button } from "@/app/components/ui/button";
 import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import { toast } from "react-hot-toast";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import NavbarItem from "@/app/components/NavbarItem";
 import useLibrary from "@/hooks/useLibrary";
+import Image from "next/image";
+import logoImage from "@/public/images/logoImage.png";
+import { lookup } from "dns";
 
 interface NavbarProps {
 	children: React.ReactNode;
@@ -54,10 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	);
 
 	useEffect(() => {
-		if (
-			!session &&
-			(pathname === "/dashboard" || pathname === "/dashboard/search")
-		) {
+		if (!session && pathname === "/dashboard") {
 			router.push("/");
 			toast.error("Please sign in");
 		}
@@ -104,8 +101,10 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 						) : null}
 					</div>
 
-					<div className=" Logo-Name h-auto w-[175px] text-3xl">
-						<Link href={"/"}>SonaSense</Link>
+					<div className=" Logo-Name h-auto w-[290px] text-3xl">
+						<Link href={"/"}>
+							<Image src={logoImage} alt="SonaSense"></Image>
+						</Link>
 					</div>
 
 					<div className=" UserSettings ">
