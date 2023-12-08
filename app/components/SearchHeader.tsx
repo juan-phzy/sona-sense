@@ -11,10 +11,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 			<div className="p-6 flex flex-col h-fit w-full bg-gradient-to-b from-neutral-800">
 				<div
 					className="
-						grid
-						grid-cols-4
-						gap-3
-						mt-4"
+						flex flex-row h-fit p-5 justify-between"
 				>
 					{children}
 				</div>

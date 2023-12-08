@@ -18,6 +18,7 @@ import useLibrary from "@/hooks/useLibrary";
 import Image from "next/image";
 import logoImage from "@/public/images/logoImage.png";
 import { lookup } from "dns";
+import usePlayer from "@/hooks/usePlayer";
 
 interface NavbarProps {
 	children: React.ReactNode;
@@ -30,6 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const { closeLib } = useLibrary();
 	const pathname = usePathname();
 	const session = useSession();
+	const player = usePlayer();
 	const routes = useMemo(
 		() => [
 			{
@@ -64,6 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 		const { error } = await supabaseClient.auth.signOut();
 		//todo reset any playing songs
 		closeLib();
+		player.setId(undefined);
 		router.push("/");
 		router.refresh();
 
