@@ -5,6 +5,7 @@ import ModalProvider from "@/providers/ModalProvider";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
+import SongsProvider from "@/providers/SongsProvider";
 import Navbar from "@/app/components/Navbar";
 import Sidebar from "@/app/components/SideBar";
 
@@ -28,10 +29,12 @@ export default async function RootLayout({
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider />
-            <Navbar>
-              <Sidebar>{children}</Sidebar>
-            </Navbar>
+            <SongsProvider>
+              <ModalProvider />
+              <Navbar>
+                <Sidebar>{children}</Sidebar>
+              </Navbar>
+            </SongsProvider>
           </UserProvider>
         </SupabaseProvider>
       </body>

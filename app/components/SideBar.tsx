@@ -2,17 +2,17 @@
 
 import useLibrary from "@/hooks/useLibrary";
 import Library from "@/app/components/Library";
-import { Song } from "@/types";
 import { useUser } from "@/hooks/useUser";
 import fetchSongs from "@/utils/fetchSongs";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSongs } from "@/providers/SongsProvider";
 
 interface SidebarProps {
   children: React.ReactNode;
 }
 
 const SideBar: React.FC<SidebarProps> = ({ children }) => {
-  const [songs, setSongs] = useState<Song[]>([]);
+  const { songs, setSongs } = useSongs();
   const { isOpen } = useLibrary();
   const { user } = useUser();
 
@@ -26,7 +26,7 @@ const SideBar: React.FC<SidebarProps> = ({ children }) => {
           console.error("Error fetching songs:", error);
         });
     }
-  }, [user]);
+  }, [user, setSongs]);
 
   return (
     <>
