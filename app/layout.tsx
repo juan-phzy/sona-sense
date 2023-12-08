@@ -7,37 +7,34 @@ import UserProvider from "@/providers/UserProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import Navbar from "@/app/components/Navbar";
 import Sidebar from "@/app/components/SideBar";
-import getSongsByUserId from "@/actions/getSongsByUserId";
 
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "SonaSense",
-	description: "Student Project for Music Web Player",
+  title: "SonaSense",
+  description: "Student Project for Music Web Player",
 };
 
 export const revalidate = 0;
 
 export default async function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	const userSongs = await getSongsByUserId();
-
-	return (
-		<html lang="en">
-			<body className={font.className}>
-				<ToasterProvider />
-				<SupabaseProvider>
-					<UserProvider>
-						<ModalProvider />
-						<Navbar>
-							<Sidebar songs={userSongs}>{children}</Sidebar>
-						</Navbar>
-					</UserProvider>
-				</SupabaseProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body className={font.className}>
+        <ToasterProvider />
+        <SupabaseProvider>
+          <UserProvider>
+            <ModalProvider />
+            <Navbar>
+              <Sidebar>{children}</Sidebar>
+            </Navbar>
+          </UserProvider>
+        </SupabaseProvider>
+      </body>
+    </html>
+  );
 }
