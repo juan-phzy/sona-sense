@@ -7,14 +7,13 @@ import { BsFillPlayCircleFill } from "react-icons/bs";
 interface ListItemProps {
 	image: string;
 	name: string;
-	href?: string;
+	href: string;
 }
 const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
 	const router = useRouter();
 
 	const onClick = () => {
-		//add auth before push
-		//router.push(href);
+		router.push(href);
 	};
 	return (
 		<>

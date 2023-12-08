@@ -16,7 +16,7 @@ export default async function Page() {
 					<ListItem
 						image="/images/liked.png"
 						name="Liked Songs"
-						href="liked"
+						href="/dashboard/liked"
 					/>
 				</Header>
 				{/**body */}
