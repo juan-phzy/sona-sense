@@ -4,8 +4,13 @@ import useUploadModal from "@/hooks/useUploadModal";
 import { BsMusicNoteList, BsPlusSquare } from "react-icons/bs";
 import { useUser } from "@/hooks/useUser";
 import { toast } from "react-hot-toast";
+import { Song } from "@/types";
 
-const Library = () => {
+interface LibraryProps {
+	songs: Song[];
+}
+
+const Library: React.FC<LibraryProps> = ({ songs }) => {
 	const uploadModal = useUploadModal();
 	const { userDetails } = useUser();
 	let canUpload: boolean;
@@ -61,7 +66,9 @@ const Library = () => {
                     mt-4
                     px-3"
 				>
-					List of Songs!
+					{songs.map((item) => (
+						<div>{item.title}</div>
+					))}
 				</div>
 			</div>
 		</>

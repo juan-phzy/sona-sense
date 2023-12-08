@@ -5,9 +5,9 @@ import ModalProvider from "@/providers/ModalProvider";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
-import Navbar from "./components/Navbar";
-import Head from "next/head";
-import Script from "next/script";
+import Navbar from "@/app/components/Navbar";
+import Sidebar from "@/app/components/SideBar";
+import getSongsByUserId from "@/actions/getSongsByUserId";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -16,11 +16,15 @@ export const metadata: Metadata = {
 	description: "Student Project for Music Web Player",
 };
 
-export default function RootLayout({
+export const revalidate = 0;
+
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const userSongs = await getSongsByUserId();
+
 	return (
 		<html lang="en">
 			<body className={font.className}>
@@ -28,13 +32,12 @@ export default function RootLayout({
 				<SupabaseProvider>
 					<UserProvider>
 						<ModalProvider />
-						<Navbar>{children}</Navbar>
+						<Navbar>
+							<Sidebar songs={userSongs}>{children}</Sidebar>
+						</Navbar>
 					</UserProvider>
 				</SupabaseProvider>
 			</body>
-			<Script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.0/dist/essentia-wasm.web.js" />
-			<Script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.0/dist/essentia.js-core.js" />
-			<Script src="/essentiaScripts/main.js" async defer />
 		</html>
 	);
 }

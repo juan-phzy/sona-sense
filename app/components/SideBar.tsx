@@ -2,12 +2,14 @@
 
 import useLibrary from "@/hooks/useLibrary";
 import Library from "@/app/components/Library";
+import { Song } from "@/types";
 
 interface SidebarProps {
 	children: React.ReactNode;
+	songs: Song[];
 }
 
-const SideBar: React.FC<SidebarProps> = ({ children }) => {
+const SideBar: React.FC<SidebarProps> = ({ children, songs }) => {
 	const { isOpen } = useLibrary();
 	return (
 		<>
@@ -26,7 +28,7 @@ const SideBar: React.FC<SidebarProps> = ({ children }) => {
 								p-4
 								text-white"
 						>
-							<Library />
+							<Library songs={songs} />
 						</div>
 					</div>
 				) : null}
