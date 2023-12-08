@@ -37,7 +37,7 @@ const UploadModal = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-    const { title, image, song } = values;
+    const { title, image, song, author } = values;
 
     // replace spaces with underscores
     const titleWithNoSpaces = title.replace(/\s+/g, "_");
@@ -90,7 +90,7 @@ const UploadModal = () => {
         .insert({
           user_id: user.id,
           title: titleWithNoSpaces,
-          artist: userDetails?.username,
+          artist: author,
           image_path: imageData.path,
           song_path: songData.path,
           bpm: songAnalysis.bpm,
