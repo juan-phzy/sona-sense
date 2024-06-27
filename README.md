@@ -1,3 +1,7 @@
+The academic portion of this project is finished.
+
+The site in general is still in a very rough draft.
+
 This project is a music-streaming web application built on next.js using TypeScript and Tailwind CSS
 
 -  All components go in the "components" folder
